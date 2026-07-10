@@ -28,6 +28,7 @@ jobs:
         with:
           repository: matheussdavid/todo-backend-java
           path: backend
+          token: ${{ secrets.BACKEND_TOKEN }}
 
       - name: Buildar imagem Docker do backend
         run: docker compose -f backend/docker-compose.ci.yml build
