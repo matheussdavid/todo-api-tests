@@ -9,7 +9,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PutTaskById extends TestBase {
+public class PutTaskByIdTest extends TestBase {
 
     @Test
     void shouldUpdateTaskWhenValidIdIsProvided() {

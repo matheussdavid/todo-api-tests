@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GetTaskById extends TestBase {
+public class GetTaskByIdTest extends TestBase {
 
     @Test
     void shouldReturnTaskWhenValidIdIsProvided() {

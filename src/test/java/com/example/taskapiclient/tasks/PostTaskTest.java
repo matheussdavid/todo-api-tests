@@ -9,7 +9,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PostTask extends TestBase {
+public class PostTaskTest extends TestBase {
 
     @Test
     void shouldCreateTaskWithValidData() {

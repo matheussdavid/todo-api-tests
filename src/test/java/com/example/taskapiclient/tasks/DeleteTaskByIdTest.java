@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DeleteTaskById extends TestBase {
+public class DeleteTaskByIdTest extends TestBase {
 
     @Test
     void shouldDeleteTaskWhenValidIdIsProvided() {

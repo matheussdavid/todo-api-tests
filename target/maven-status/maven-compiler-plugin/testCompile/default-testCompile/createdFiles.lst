@@ -1,7 +1,7 @@
-com/example/taskapiclient/tasks/GetTasks.class
-com/example/taskapiclient/tasks/PostTask.class
+com/example/taskapiclient/tasks/PutTaskByIdTest.class
 com/example/taskapiclient/TestBase.class
-com/example/taskapiclient/health/HealthCheck.class
-com/example/taskapiclient/tasks/DeleteTaskById.class
-com/example/taskapiclient/tasks/GetTaskById.class
-com/example/taskapiclient/tasks/PutTaskById.class
+com/example/taskapiclient/tasks/PostTaskTest.class
+com/example/taskapiclient/tasks/GetTasksTest.class
+com/example/taskapiclient/tasks/GetTaskByIdTest.class
+com/example/taskapiclient/health/HealthCheckTest.class
+com/example/taskapiclient/tasks/DeleteTaskByIdTest.class

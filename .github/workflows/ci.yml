@@ -52,7 +52,7 @@ jobs:
               exit 1
 
       - name: Rodar testes REST Assured
-        run: ./mvnw test
+        run: ./mvnw clean test
 
       - name: Gerar relatório Allure
         run: ./mvnw allure:report
@@ -61,7 +61,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: allure-report
-          path: target/site/allure-maven/
+          path: target/site/allure-maven-plugin/
 
       - name: Parar containers
         if: always()
