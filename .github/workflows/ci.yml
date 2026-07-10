@@ -1,17 +1,19 @@
-name: CI
+name: API Tests
 
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  repository_dispatch:
+    types: [backend-updated]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout do código
+      - name: Checkout testes
         uses: actions/checkout@v4
 
       - name: Configurar JDK 25
@@ -21,5 +23,36 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Compilar projeto
-        run: ./mvnw compile -DskipTests
+      - name: Clonar backend
+        uses: actions/checkout@v4
+        with:
+          repository: matheussdavid/todo-backend-java
+          path: backend
+
+      - name: Buildar imagem Docker do backend
+        run: docker compose -f backend/docker-compose.ci.yml build
+
+      - name: Subir PostgreSQL e backend
+        run: docker compose -f backend/docker-compose.ci.yml up -d
+
+      - name: Aguardar backend ficar pronto
+        run: |
+              echo "Aguardando backend..."                            
+              for i in $(seq 1 30); do                                
+                if curl -s http://localhost:8080/api/health | grep -q "UP"; then
+              echo "Backend pronto!"
+              exit 0
+              fi
+              echo "Tentativa $i/30..."
+              sleep 5
+              done
+              echo "Backend não ficou pronto a tempo"
+              docker compose -f backend/docker-compose.ci.yml logs
+              exit 1
+
+      - name: Rodar testes REST Assured
+        run: ./mvnw test
+
+      - name: Parar containers
+        if: always()
+        run: docker compose -f backend/docker-compose.ci.yml down
