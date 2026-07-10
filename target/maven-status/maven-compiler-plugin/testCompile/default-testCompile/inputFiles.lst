@@ -1,0 +1,7 @@
+/home/matheus/Documentos/projetos/todo-api-tests/src/test/java/com/example/taskapiclient/tasks/GetTaskById.java
+/home/matheus/Documentos/projetos/todo-api-tests/src/test/java/com/example/taskapiclient/tasks/PutTaskById.java
+/home/matheus/Documentos/projetos/todo-api-tests/src/test/java/com/example/taskapiclient/tasks/PostTask.java
+/home/matheus/Documentos/projetos/todo-api-tests/src/test/java/com/example/taskapiclient/health/HealthCheck.java
+/home/matheus/Documentos/projetos/todo-api-tests/src/test/java/com/example/taskapiclient/TestBase.java
+/home/matheus/Documentos/projetos/todo-api-tests/src/test/java/com/example/taskapiclient/tasks/DeleteTaskById.java
+/home/matheus/Documentos/projetos/todo-api-tests/src/test/java/com/example/taskapiclient/tasks/GetTasks.java

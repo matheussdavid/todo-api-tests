@@ -1,5 +1,6 @@
 package com.example.taskapiclient;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeAll;
@@ -12,6 +13,7 @@ public abstract class TestBase {
     static void setup() {
         RestAssured.baseURI = "http://localhost:8080";
         RestAssured.basePath = "/api";
+        RestAssured.filters(new AllureRestAssured());
     }
 
     protected int obterTaskId() {
