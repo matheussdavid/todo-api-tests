@@ -94,7 +94,11 @@ public class PostTask extends TestBase {
                 .body(request)
                 .post("/tasks")
                 .then()
-                .statusCode(400);
+                .statusCode(400)
+                .extract()
+                .response();
+
+        assertThat(response.jsonPath().getString("error")).isEqualTo("Status inválido. Valores aceitos: PENDENTE, EM_ANDAMENTO, CONCLUIDA");
     }
 
     @Test

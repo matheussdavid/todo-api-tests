@@ -28,11 +28,11 @@ public class GetTaskById extends TestBase {
 
     @Test
     void shouldReturn404WhenGettingNonExistentTask() {
-        var id = 0;
+        var taskId = 0;
         var response = RestAssured
                 .given()
                 .accept(ContentType.JSON)
-                .pathParam("id", id)
+                .pathParam("id", taskId)
                 .when()
                 .get("/tasks/{id}")
                 .then()
@@ -40,23 +40,23 @@ public class GetTaskById extends TestBase {
                 .extract()
                 .response();
 
-        assertThat(response.jsonPath().getString("error")).isEqualTo("Tarefa não encontrada com id: " + id);
+        assertThat(response.jsonPath().getString("error")).isEqualTo("Tarefa não encontrada com id: " + taskId);
     }
 
     @Test
     void shouldNotReturnTaskWhenInvalidIdIsProvided() {
-        var id = "ab";
+        var taskId = "ab";
         var response = RestAssured
                 .given()
                 .accept(ContentType.JSON)
-                .pathParam("id", id)
+                .pathParam("id", taskId)
                 .when()
                 .get("/tasks/{id}")
                 .then()
-                .statusCode(400);
-                /*.extract()
+                .statusCode(400)
+                .extract()
                 .response();
 
-        assertThat(response.jsonPath().getString("error")).isEqualTo("Tarefa não encontrada com id: " + id);*/
+        assertThat(response.jsonPath().getString("error")).isEqualTo("O ID informado não é válido");
     }
 }

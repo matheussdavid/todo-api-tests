@@ -5,6 +5,8 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GetTasks extends TestBase {
@@ -22,8 +24,9 @@ public class GetTasks extends TestBase {
                     .extract()
                     .response();
 
-        assertThat(response.jsonPath().getList("$")).isNotEmpty();
-        assertThat(response.jsonPath().getMap("$[0]")).containsKeys("id", "title", "description", "status",
+        var tasks = response.jsonPath().getList("$", Map.class);
+        assertThat(tasks).isNotEmpty();
+        assertThat(tasks.get(0)).containsKeys("id", "title", "description", "status",
                 "createdAt", "updatedAt");
 
     }

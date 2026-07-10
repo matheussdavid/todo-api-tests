@@ -140,11 +140,11 @@ public class PutTaskById extends TestBase {
                 .when()
                 .put("/tasks/{id}")
                 .then()
-                .statusCode(400);
-                /*.extract()
+                .statusCode(400)
+                .extract()
                 .response();
 
-        assertThat(response.jsonPath().getString("error")).isEqualTo("Tarefa não encontrada com id: " + id);*/
+        assertThat(response.jsonPath().getString("error")).isEqualTo("O ID informado não é válido");
     }
 
     @Test
@@ -164,10 +164,10 @@ public class PutTaskById extends TestBase {
                 .when()
                 .put("/tasks/{id}")
                 .then()
-                .statusCode(400);
-                /*.extract()
+                .statusCode(400)
+                .extract()
                 .response();
 
-        assertThat(response.jsonPath().getString("error")).isEqualTo("Tarefa não encontrada com id: " + id);*/
+        assertThat(response.jsonPath().getString("error")).isEqualTo("Status inválido. Valores aceitos: PENDENTE, EM_ANDAMENTO, CONCLUIDA");
     }
 }

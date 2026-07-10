@@ -48,17 +48,16 @@ public class DeleteTaskById extends TestBase {
                 .when()
                 .delete("/tasks/{id}")
                 .then()
-                .statusCode(400);
-                /*.extract()
+                .statusCode(400)
+                .extract()
                 .response();
 
-        assertThat(response.jsonPath().getString("error")).isEqualTo("Tarefa não encontrada com id: " + id);*/
+        assertThat(response.jsonPath().getString("error")).isEqualTo("O ID informado não é válido");
     }
 
     @Test
     void shouldReturn404WhenTaskIsAlreadyDeleted() {
         var taskId = obterTaskId();
-
         RestAssured
                 .given()
                 .accept(ContentType.JSON)
