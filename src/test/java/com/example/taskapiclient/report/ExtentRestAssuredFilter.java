@@ -4,9 +4,12 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import io.restassured.filter.Filter;
 import io.restassured.filter.FilterContext;
+import io.restassured.http.Headers;
 import io.restassured.response.Response;
 import io.restassured.specification.FilterableRequestSpecification;
 import io.restassured.specification.FilterableResponseSpecification;
+
+import java.util.Map;
 
 public class ExtentRestAssuredFilter implements Filter {
 
@@ -28,6 +31,18 @@ public class ExtentRestAssuredFilter implements Filter {
         reqLog.append("<strong>Method:</strong> ").append(requestSpec.getMethod()).append("<br/>");
         reqLog.append("<strong>URI:</strong> ").append(requestSpec.getURI()).append("<br/>");
 
+        Map<String, String> queryParams = requestSpec.getQueryParams();
+        if (queryParams != null && !queryParams.isEmpty()) {
+            reqLog.append("<strong>Query Params:</strong> ").append(queryParams).append("<br/>");
+        }
+
+        Headers reqHeaders = requestSpec.getHeaders();
+        if (reqHeaders != null && !reqHeaders.asList().isEmpty()) {
+            reqLog.append("<strong>Request Headers:</strong><pre>");
+            reqHeaders.forEach(h -> reqLog.append(h.getName()).append(": ").append(h.getValue()).append("\n"));
+            reqLog.append("</pre>");
+        }
+
         String reqBody = requestSpec.getBody();
         if (reqBody != null) {
             reqLog.append("<strong>Request Body:</strong><pre>")
@@ -38,6 +53,14 @@ public class ExtentRestAssuredFilter implements Filter {
 
         StringBuilder resLog = new StringBuilder();
         resLog.append("<strong>Status:</strong> ").append(response.getStatusCode()).append("<br/>");
+        resLog.append("<strong>Response Time:</strong> ").append(response.getTime()).append(" ms<br/>");
+
+        Headers resHeaders = response.getHeaders();
+        if (resHeaders != null && !resHeaders.asList().isEmpty()) {
+            resLog.append("<strong>Response Headers:</strong><pre>");
+            resHeaders.forEach(h -> resLog.append(h.getName()).append(": ").append(h.getValue()).append("\n"));
+            resLog.append("</pre>");
+        }
 
         String resBody = response.getBody().asString();
         if (resBody != null && !resBody.isEmpty()) {
