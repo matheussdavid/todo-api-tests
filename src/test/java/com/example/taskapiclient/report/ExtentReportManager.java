@@ -15,6 +15,7 @@ public class ExtentReportManager {
     }
 
     public static void init() {
+        if(extent != null) return;
         new File("target/extent-report").mkdirs();
         ExtentSparkReporter spark = new ExtentSparkReporter("target/extent-report/index.html");
         spark.config().setDocumentTitle("API Tests Report");
