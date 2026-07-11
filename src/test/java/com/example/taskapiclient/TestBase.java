@@ -1,19 +1,22 @@
 package com.example.taskapiclient;
 
-import io.qameta.allure.restassured.AllureRestAssured;
+import com.example.taskapiclient.report.ExtentReportExtension;
+import com.example.taskapiclient.report.ExtentRestAssuredFilter;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.Map;
 
+@ExtendWith(ExtentReportExtension.class)
 public abstract class TestBase {
 
     @BeforeAll
     static void setup() {
         RestAssured.baseURI = "http://localhost:8080";
         RestAssured.basePath = "/api";
-        RestAssured.filters(new AllureRestAssured());
+        RestAssured.filters(new ExtentRestAssuredFilter());
     }
 
     protected int obterTaskId() {
