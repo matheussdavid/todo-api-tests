@@ -56,7 +56,10 @@ jobs:
 
       - name: Gerar relatório Allure
         if: always()
-        run: npx allure-commandline generate target/allure-results --clean -o target/site/allure-maven
+        run: |
+          curl -sL https://github.com/allure-framework/allure2/releases/download/2.25.0/allure-2.25.0.tgz -o /tmp/allure.tgz
+          tar xzf /tmp/allure.tgz -C /tmp
+          /tmp/allure-2.25.0/bin/allure generate target/allure-results --clean -o target/site/allure-maven
 
       - name: Upload relatório Allure
         if: always()
