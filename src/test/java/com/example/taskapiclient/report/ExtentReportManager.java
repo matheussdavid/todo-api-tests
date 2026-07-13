@@ -5,14 +5,11 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ExtentReportManager {
 
     private static ExtentReports extent;
     private static final ThreadLocal<ExtentTest> testNode = new ThreadLocal<>();
-    private static final Map<String, ExtentTest> parentTests = new HashMap<>();
 
     private ExtentReportManager() {
     }
@@ -33,18 +30,12 @@ public class ExtentReportManager {
         if (extent != null) {
             extent.flush();
         }
-        parentTests.clear();
     }
 
-    public static ExtentTest getOrCreateParentTest(String className) {
-        return parentTests.computeIfAbsent(className, name -> extent.createTest(name));
-    }
-
-    public static ExtentTest createChildTest(String parentClassName, String childName) {
-        ExtentTest parent = getOrCreateParentTest(parentClassName);
-        ExtentTest child = parent.createNode(childName);
-        testNode.set(child);
-        return child;
+    public static ExtentTest createTest(String name) {
+        ExtentTest test = extent.createTest(name);
+        testNode.set(test);
+        return test;
     }
 
     public static ExtentTest getCurrentTest() {
