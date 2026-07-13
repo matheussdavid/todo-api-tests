@@ -53,7 +53,7 @@ public class GetTaskByIdTest extends TestBase {
                 .when()
                 .get("/tasks/{id}")
                 .then()
-                .statusCode(404)
+                .statusCode(400)
                 .extract()
                 .response();
 
