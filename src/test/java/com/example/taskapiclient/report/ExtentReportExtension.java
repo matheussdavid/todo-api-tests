@@ -24,8 +24,7 @@ public class ExtentReportExtension implements BeforeAllCallback, AfterAllCallbac
     public void beforeEach(ExtensionContext ctx) {
         String className = ctx.getRequiredTestClass().getSimpleName();
         String methodName = ctx.getDisplayName();
-        ExtentTest test = ExtentReportManager.createTest(className + " > " + methodName);
-        test.assignCategory(className);
+        ExtentReportManager.createChildTest(className, methodName);
     }
 
     @Override
