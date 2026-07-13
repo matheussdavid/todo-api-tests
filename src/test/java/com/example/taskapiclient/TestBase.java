@@ -12,11 +12,16 @@ import java.util.Map;
 @ExtendWith(ExtentReportExtension.class)
 public abstract class TestBase {
 
+    private static boolean filterAdded = false;
+
     @BeforeAll
     static void setup() {
         RestAssured.baseURI = "http://localhost:8080";
         RestAssured.basePath = "/api";
-        RestAssured.filters(new ExtentRestAssuredFilter());
+        if (!filterAdded) {
+            RestAssured.filters(new ExtentRestAssuredFilter());
+            filterAdded = true;
+        }
     }
 
     protected int obterTaskId() {
