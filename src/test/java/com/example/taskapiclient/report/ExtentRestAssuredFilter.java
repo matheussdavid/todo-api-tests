@@ -69,11 +69,7 @@ public class ExtentRestAssuredFilter implements Filter {
                     .append("</pre>");
         }
 
-        if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
-            test.log(Status.PASS, resLog.toString());
-        } else {
-            test.log(Status.FAIL, resLog.toString());
-        }
+        test.log(Status.INFO, resLog.toString());
 
         return response;
     }

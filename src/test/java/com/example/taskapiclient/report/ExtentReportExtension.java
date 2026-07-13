@@ -8,6 +8,8 @@ import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
+import java.util.Optional;
+
 public class ExtentReportExtension implements BeforeAllCallback, AfterAllCallback, BeforeEachCallback, AfterEachCallback {
 
     @Override
@@ -30,8 +32,13 @@ public class ExtentReportExtension implements BeforeAllCallback, AfterAllCallbac
     @Override
     public void afterEach(ExtensionContext ctx) {
         ExtentTest test = ExtentReportManager.getCurrentTest();
-        if (test != null && test.getStatus() == null) {
-            test.log(Status.PASS, "Test passed");
+        if (test != null) {
+            Optional<Throwable> exception = ctx.getExecutionException();
+            if (exception.isPresent()) {
+                test.log(Status.FAIL, exception.get());
+            } else if (test.getStatus() == null) {
+                test.log(Status.PASS, "Test passed");
+            }
         }
         ExtentReportManager.removeCurrentTest();
     }
