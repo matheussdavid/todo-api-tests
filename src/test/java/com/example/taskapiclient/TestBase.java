@@ -40,7 +40,7 @@ public abstract class TestBase {
                 .contentType(ContentType.JSON)
                 .body(Map.of(
                         "title", "task padrão",
-                        "description", "Criada automatic    amente",
+                        "description", "Criada automaticamente",
                         "status", "PENDENTE"
                 ))
                 .when()
